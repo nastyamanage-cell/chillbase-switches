@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChillBase — Выбери два</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{
+    min-height:100%;
+    font-family:'Onest',sans-serif;
+    background:#0D0D0D;
+    color:#fff;
+  }
+
+  body{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:32px;
+    padding:48px 24px;
+    position:relative;
+  }
+
+  /* ── streams section ── */
+  .streams-section{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:900px;
+    overflow:visible;
+    padding-right:12px;
+  }
+
+  .streams-title{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.01em;
+    margin-bottom:8px;
+  }
+
+  /* ── value blocks ── */
+  .value-blocks{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:32px;
+  }
+
+  .value-block{
+    padding:16px 18px;
+    border-radius:14px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+  }
+
+  .value-block-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+  }
+
+  .value-block-icon{
+    width:8px;height:8px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  .value-block-icon.commercial{
+    background:#C5E654;
+    box-shadow:0 0 8px rgba(197,230,84,.4);
+  }
+
+  .value-block-icon.brand{
+    background:#78C8FF;
+    box-shadow:0 0 8px rgba(120,200,255,.4);
+  }
+
+  .value-block-label{
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:rgba(255,255,255,.5);
+  }
+
+  .value-block-tags{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+
+  .value-tag{
+    font-size:11px;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:6px;
+    line-height:1.3;
+  }
+
+  .value-tag.warm{
+    background:rgba(180,220,80,.12);
+    color:#C5E654;
+    border:1px solid rgba(180,220,80,.12);
+  }
+
+  .value-tag.cool{
+    background:rgba(120,200,255,.08);
+    color:#78C8FF;
+    border:1px solid rgba(120,200,255,.1);
+  }
+
+  .streams-grid{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  /* ── stream group (performance / indirect) ── */
+  .stream-group{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .stream-group-label{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    padding:4px 12px;
+    border-radius:6px;
+    display:inline-block;
+    width:fit-content;
+  }
+
+  .stream-group-label.perf{
+    background:rgba(255,100,0,.15);
+    color:#FF8800;
+  }
+
+  .stream-group-label.indirect{
+    background:rgba(120,200,255,.1);
+    color:#78C8FF;
+  }
+
+  .stream-group-items{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  /* ── stream group with bracket ── */
+  .stream-group-body{
+    display:flex;
+    gap:0;
+    align-items:stretch;
+  }
+
+  .stream-group-left{
+    flex:0 0 680px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-width:0;
+  }
+
+  .stream-group-left .stream-row{
+    flex:1;
+  }
+
+  /* ── bracket connector ── */
+  .stream-bracket{
+    width:48px;
+    flex-shrink:0;
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+
+  .stream-bracket svg{
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:100%;
+  }
+
+  /* ── KPI column (right of bracket) ── */
+  .stream-kpi-column{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:6px;
+    flex-shrink:0;
+  }
+
+  .stream-kpi-goal{
+    font-size:11px;
+    color:rgba(255,255,255,.35);
+    margin-top:2px;
+    padding-left:2px;
+  }
+
+  /* ── single stream row ── */
+  .stream-row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:16px 20px;
+    border-radius:14px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+    transition:background .2s;
+  }
+
+  .stream-row:hover{
+    background:rgba(255,255,255,.07);
+  }
+
+  .stream-num{
+    font-size:20px;
+    font-weight:800;
+    color:rgba(255,255,255,.25);
+    width:28px;
+    flex-shrink:0;
+    text-align:center;
+  }
+
+  .stream-info{
+    flex:1;
+    min-width:0;
+  }
+
+  .stream-name{
+    font-size:15px;
+    font-weight:700;
+    color:rgba(255,255,255,.85);
+    line-height:1.3;
+  }
+
+  .stream-detail{
+    font-size:12px;
+    color:rgba(255,255,255,.35);
+    margin-top:2px;
+  }
+
+  .kpi-tag{
+    font-size:11px;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:6px;
+    white-space:nowrap;
+    line-height:1.3;
+  }
+
+  .kpi-tag.green{
+    background:#C5E654;
+    color:#1a1a0a;
+    border:none;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:4px;
+    box-shadow:
+      2px 3px 0 rgba(0,0,0,.3),
+      inset 0 1px 0 rgba(255,255,255,.3);
+    transform:rotate(-1deg);
+    font-size:12px;
+  }
+
+  .kpi-tag.blue{
+    background:rgba(120,200,255,.1);
+    color:#78C8FF;
+    border:1px solid rgba(120,200,255,.1);
+  }
+
+  /* ── divider ── */
+  .streams-divider{
+    height:1px;
+    background:rgba(255,255,255,.06);
+    margin:8px 0;
+  }
+
+  /* ── subtle grid background ── */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ── bottom ambient glow ── */
+  body::after{
+    content:'';
+    position:fixed;
+    bottom:-120px;left:50%;
+    transform:translateX(-50%);
+    width:900px;height:400px;
+    background:radial-gradient(ellipse at center, rgba(255,100,0,.35) 0%, rgba(204,34,0,.15) 40%, transparent 70%);
+    filter:blur(60px);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ── section heading ── */
+  .section-heading{
+    position:relative;
+    z-index:1;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.01em;
+    text-align:center;
+  }
+
+  /* ── main container ── */
+  .container{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    gap:56px;
+    padding:48px 56px;
+    border-radius:24px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(12px);
+  }
+
+  /* ── single switch row ── */
+  .switch-row{
+    display:flex;
+    align-items:center;
+    gap:32px;
+    cursor:pointer;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+
+  /* ── track ── */
+  .track{
+    position:relative;
+    width:100px;
+    height:44px;
+    border-radius:22px;
+    background:#1A1A1A;
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,.6),
+      0 1px 0 rgba(255,255,255,.05);
+    flex-shrink:0;
+    transition:background .35s ease, box-shadow .35s ease;
+  }
+
+  .track::before{
+    content:'';
+    position:absolute;
+    inset:2px;
+    border-radius:20px;
+    background:linear-gradient(180deg, rgba(0,0,0,.3), transparent);
+    pointer-events:none;
+  }
+
+  /* ── knob ── */
+  .knob{
+    position:absolute;
+    top:3px;left:3px;
+    width:38px;height:38px;
+    border-radius:50%;
+    background:linear-gradient(145deg, #e0e0e0, #a0a0a0);
+    box-shadow:
+      0 2px 8px rgba(0,0,0,.5),
+      inset 0 1px 2px rgba(255,255,255,.6),
+      inset 0 -1px 2px rgba(0,0,0,.2);
+    transition:left .35s cubic-bezier(.4,.0,.2,1), box-shadow .35s ease, background .35s ease;
+  }
+
+  /* ── knob groove detail ── */
+  .knob::after{
+    content:'';
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:16px;height:2px;
+    border-radius:1px;
+    background:rgba(0,0,0,.18);
+    box-shadow:0 4px 0 rgba(0,0,0,.18), 0 -4px 0 rgba(0,0,0,.18);
+  }
+
+  /* ── active state ── */
+  .switch-row.active .track{
+    background:linear-gradient(135deg, #CC2200, #FF6600, #FF8800);
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,.3),
+      0 0 24px rgba(255,100,0,.4),
+      0 0 60px rgba(255,100,0,.15);
+  }
+
+  .switch-row.active .knob{
+    left:59px;
+    background:linear-gradient(145deg, #fff, #ddd);
+    box-shadow:
+      0 2px 12px rgba(255,100,0,.5),
+      inset 0 1px 2px rgba(255,255,255,.8),
+      inset 0 -1px 2px rgba(0,0,0,.1);
+  }
+
+  /* ── label ── */
+  .label{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:.02em;
+    line-height:1.3;
+    color:rgba(255,255,255,.55);
+    transition:color .35s ease, text-shadow .35s ease;
+    max-width:320px;
+  }
+
+  .switch-row.active .label{
+    color:#fff;
+    text-shadow:0 0 20px rgba(255,100,0,.3);
+  }
+
+  /* ── hint ── */
+  .hint{
+    font-size:14px;
+    color:rgba(255,255,255,.25);
+    letter-spacing:.03em;
+    z-index:1;
+    text-align:center;
+    padding-bottom:24px;
+  }
+
+  /* ── responsive ── */
+  @media(max-width:600px){
+    .container{padding:32px 24px;gap:40px}
+    .label{font-size:16px;max-width:200px}
+    .track{width:80px;height:36px;border-radius:18px}
+    .knob{width:30px;height:30px;top:3px;left:3px}
+    .switch-row.active .knob{left:47px}
+  }
+</style>
+</head>
+<body>
+
+<div class="streams-section">
+  <div class="streams-title">Media Marketing Streams</div>
+  <div class="value-blocks">
+    <div class="value-block">
+      <div class="value-block-header">
+        <div class="value-block-icon commercial"></div>
+        <div class="value-block-label">Immediate Commercial Value</div>
+      </div>
+      <div class="value-block-tags">
+        <span class="value-tag warm">New Players Acquisition</span>
+        <span class="value-tag warm">Sleeping Players Reactivation</span>
+        <span class="value-tag warm">Active Players Monetization Boost</span>
+      </div>
+    </div>
+    <div class="value-block">
+      <div class="value-block-header">
+        <div class="value-block-icon brand"></div>
+        <div class="value-block-label">Strategic Brand Value</div>
+      </div>
+      <div class="value-block-tags">
+        <span class="value-tag cool">UGC content amount</span>
+        <span class="value-tag cool">Platform Subscribers</span>
+        <span class="value-tag cool">Platform Reach</span>
+        <span class="value-tag cool">Brand metrics</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="streams-grid">
+
+    <!-- Performance-driven -->
+    <div class="stream-group">
+      <div class="stream-group-label perf">Performance-driven</div>
+      <div class="stream-group-body">
+        <div class="stream-group-left">
+          <div class="stream-row">
+            <div class="stream-num">1</div>
+            <div class="stream-info">
+              <div class="stream-name">Media Buying & Performance driven SMM</div>
+            </div>
+          </div>
+          <div class="stream-row">
+            <div class="stream-num">2</div>
+            <div class="stream-info">
+              <div class="stream-name">Creator Programm</div>
+            </div>
+          </div>
+        </div>
+        <div class="stream-bracket" id="bracket-perf">
+          <svg preserveAspectRatio="none" viewBox="0 0 48 100">
+            <path d="M4 8 C24 8, 24 50, 44 50 M4 92 C24 92, 24 50, 44 50" stroke="#C5E654" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stream-kpi-column">
+          <span class="kpi-tag green">P. ROAS 365</span>
+          <div class="stream-kpi-goal" style="font-size:13px">Goal: $70K → $1M<br>monthly spend</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="streams-divider"></div>
+
+    <!-- Indirect -->
+    <div class="stream-group">
+      <div class="stream-group-label indirect">Indirect marketing</div>
+      <div class="stream-group-body">
+        <div class="stream-group-left">
+          <div class="stream-row">
+            <div class="stream-num">3</div>
+            <div class="stream-info">
+              <div class="stream-name">Brand SMM & Community-driven Events</div>
+            </div>
+          </div>
+          <div class="stream-row">
+            <div class="stream-num">4</div>
+            <div class="stream-info">
+              <div class="stream-name">Special Projects & Events</div>
+              <div class="stream-detail">Mar-Apr Global Launch &nbsp;·&nbsp; June Salamanca Brothers</div>
+            </div>
+          </div>
+        </div>
+        <div class="stream-bracket" id="bracket-indirect">
+          <svg preserveAspectRatio="none" viewBox="0 0 48 100">
+            <path d="M4 8 C24 8, 24 50, 44 50 M4 92 C24 92, 24 50, 44 50" stroke="#78C8FF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="stream-kpi-column">
+          <span class="kpi-tag green">Reactivations</span>
+          <span class="kpi-tag green">Monetisation Upside</span>
+          <span class="kpi-tag green">Project-based KPIs</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-heading" style="margin-top:32px">Tactical challenge of the planning process</div>
+<div class="hint" style="padding-bottom:4px;margin-top:-4px">Хочется все и сразу</div>
+
+<div class="container">
+  <div class="switch-row" data-index="0" onclick="toggle(0)">
+    <div class="track"><div class="knob"></div></div>
+    <div class="label">EBITDA 15%</div>
+  </div>
+  <div class="switch-row" data-index="1" onclick="toggle(1)">
+    <div class="track"><div class="knob"></div></div>
+    <div class="label">Maximum Performance Spend</div>
+  </div>
+  <div class="switch-row" data-index="2" onclick="toggle(2)">
+    <div class="track"><div class="knob"></div></div>
+    <div class="label">Бренд давай, чтоб круто было!</div>
+  </div>
+</div>
+
+<script>
+  const rows = document.querySelectorAll('.switch-row');
+  const state = [false, false, false];
+
+  function render() {
+    rows.forEach((row, i) => {
+      row.classList.toggle('active', state[i]);
+    });
+  }
+
+  function toggle(index) {
+    if (state[index]) {
+      // turning OFF — always allowed
+      state[index] = false;
+    } else {
+      // turning ON — check how many are already on
+      const activeCount = state.filter(Boolean).length;
+      if (activeCount >= 2) {
+        // reset all others, only keep the new one
+        state[0] = false;
+        state[1] = false;
+        state[2] = false;
+      }
+      state[index] = true;
+    }
+    render();
+  }
+</script>
+
+</body>
+</html>
