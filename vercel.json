@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/chillbase-switches.html"
+    }
+  ]
+}
