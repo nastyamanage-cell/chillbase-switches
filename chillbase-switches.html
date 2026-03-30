@@ -581,6 +581,199 @@
     color:#78C8FF;
   }
 
+  /* ── key metrics map ── */
+  .key-metrics{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:900px;
+    margin-top:64px;
+  }
+
+  .key-metrics-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(30px,5vw,42px);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:-0.5px;
+    text-align:center;
+    margin-bottom:32px;
+  }
+
+  .km-group{
+    margin-bottom:28px;
+  }
+
+  .km-group-label{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    padding:6px 14px;
+    border-radius:6px;
+    display:inline-block;
+    margin-bottom:16px;
+  }
+
+  .km-group-label.financial{
+    background:rgba(180,220,80,.12);
+    color:#C5E654;
+  }
+
+  .km-group-label.nonfinancial{
+    background:rgba(120,200,255,.1);
+    color:#78C8FF;
+  }
+
+  .km-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+
+  .km-card{
+    padding:14px 20px;
+    border-radius:12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+  }
+
+  .km-card-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:17px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color:rgba(255,255,255,.85);
+  }
+
+  .km-card-name.warm{ color:#C5E654; }
+  .km-card-name.cool{ color:#78C8FF; }
+
+  .km-card-goal{
+    font-size:15px;
+    color:rgba(255,255,255,.3);
+    margin-top:2px;
+  }
+
+  .km-connector{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:4px 0 4px 20px;
+  }
+
+  .km-connector-line{
+    width:40px;
+    height:2px;
+    background:linear-gradient(to right, rgba(197,230,84,.3), rgba(197,230,84,.6));
+    flex-shrink:0;
+  }
+
+  .km-connector-label{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:rgba(255,255,255,.3);
+    white-space:nowrap;
+  }
+
+  .km-roas{
+    background:#C5E654;
+    color:#1a1a0a;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:17px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:10px 18px;
+    border-radius:8px;
+    box-shadow:
+      2px 3px 0 rgba(0,0,0,.25),
+      inset 0 1px 0 rgba(255,255,255,.3);
+  }
+
+  /* financial metrics tree layout */
+  .km-tree{
+    display:flex;
+    align-items:stretch;
+    gap:0;
+  }
+
+  .km-tree-left{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .km-tree-connector{
+    display:flex;
+    align-items:center;
+    width:60px;
+    flex-shrink:0;
+    position:relative;
+  }
+
+  .km-tree-connector svg{
+    position:absolute;
+    top:0;left:0;
+    width:100%;height:100%;
+  }
+
+  .km-tree-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:4px;
+  }
+
+  .km-tree-efficiency{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:rgba(255,255,255,.25);
+    margin-bottom:4px;
+  }
+
+  /* non-financial grid */
+  .km-nf-grid{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .km-nf-card{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    padding:14px 20px;
+    border-radius:12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.06);
+  }
+
+  .km-nf-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:17px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color:#78C8FF;
+  }
+
+  .km-nf-target{
+    font-size:15px;
+    color:rgba(255,255,255,.3);
+  }
+
   /* ── expandable metrics panel ── */
   .stream-row.expandable{
     cursor:pointer;
@@ -923,6 +1116,62 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- ═══ 4. KEY METRICS MAP ═══ -->
+
+<div class="key-metrics">
+  <div class="key-metrics-title">Key Metrics</div>
+
+  <!-- Financial -->
+  <div class="km-group">
+    <div class="km-group-label financial">Key Financial Metrics to Track</div>
+
+    <div class="km-tree">
+      <div class="km-tree-left">
+        <div class="km-nf-card">
+          <div class="km-card-name warm">Revenue New Players</div>
+        </div>
+        <div class="km-nf-card">
+          <div class="km-card-name warm">Revenue Reactivated Players</div>
+        </div>
+      </div>
+
+      <div class="km-tree-connector">
+        <svg preserveAspectRatio="none" viewBox="0 0 60 100">
+          <path d="M4 20 C30 20, 30 50, 56 50 M4 80 C30 80, 30 50, 56 50" stroke="#C5E654" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="km-tree-right">
+        <div class="km-tree-efficiency">Efficiency</div>
+        <div class="km-roas">Blended P.ROAS 360</div>
+      </div>
+    </div>
+
+    <div class="km-nf-card" style="margin-top:8px">
+      <div class="km-card-name warm">Revenue Organic Traffic</div>
+    </div>
+  </div>
+
+  <!-- Non-financial -->
+  <div class="km-group">
+    <div class="km-group-label nonfinancial">Key Non-Financial Metrics to Track</div>
+
+    <div class="km-nf-grid">
+      <div class="km-nf-card">
+        <div class="km-nf-name">Platform Subscribers</div>
+        <div class="km-nf-target">200K → 9M</div>
+      </div>
+      <div class="km-nf-card">
+        <div class="km-nf-name">N of Creators in CCP</div>
+        <div class="km-nf-target">200 → 1,000</div>
+      </div>
+      <div class="km-nf-card">
+        <div class="km-nf-name">UGC Content Amount</div>
+      </div>
+    </div>
   </div>
 </div>
 
