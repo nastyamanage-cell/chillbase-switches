@@ -6,15 +6,17 @@
 <title>ChillBase — Выбери два</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
   html,body{
     min-height:100%;
-    font-family:'Onest',sans-serif;
+    font-family:'Barlow',sans-serif;
+    font-size:18px;
+    line-height:1.8;
     background:#0D0D0D;
-    color:#fff;
+    color:#f0ede0;
   }
 
   body{
@@ -38,10 +40,13 @@
   }
 
   .streams-title{
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:.01em;
-    margin-bottom:8px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(30px,5vw,42px);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:-0.5px;
+    text-align:center;
+    margin-bottom:16px;
   }
 
   /* ── value blocks ── */
@@ -83,10 +88,11 @@
   }
 
   .value-block-label{
-    font-size:12px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
     font-weight:700;
     text-transform:uppercase;
-    letter-spacing:.06em;
+    letter-spacing:2px;
     color:rgba(255,255,255,.5);
   }
 
@@ -97,9 +103,9 @@
   }
 
   .value-tag{
-    font-size:11px;
+    font-size:15px;
     font-weight:600;
-    padding:4px 10px;
+    padding:6px 12px;
     border-radius:6px;
     line-height:1.3;
   }
@@ -130,11 +136,12 @@
   }
 
   .stream-group-label{
-    font-size:11px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
     font-weight:700;
     text-transform:uppercase;
-    letter-spacing:.1em;
-    padding:4px 12px;
+    letter-spacing:2px;
+    padding:6px 14px;
     border-radius:6px;
     display:inline-block;
     width:fit-content;
@@ -201,9 +208,9 @@
   }
 
   .stream-kpi-goal{
-    font-size:11px;
+    font-size:15px;
     color:rgba(255,255,255,.35);
-    margin-top:2px;
+    margin-top:4px;
     padding-left:2px;
   }
 
@@ -224,10 +231,11 @@
   }
 
   .stream-num{
-    font-size:20px;
-    font-weight:800;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:24px;
+    font-weight:900;
     color:rgba(255,255,255,.25);
-    width:28px;
+    width:32px;
     flex-shrink:0;
     text-align:center;
   }
@@ -238,25 +246,31 @@
   }
 
   .stream-name{
-    font-size:15px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:20px;
     font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
     color:rgba(255,255,255,.85);
     line-height:1.3;
   }
 
   .stream-detail{
-    font-size:12px;
+    font-size:15px;
     color:rgba(255,255,255,.35);
-    margin-top:2px;
+    margin-top:4px;
   }
 
   .kpi-tag{
-    font-size:11px;
-    font-weight:600;
-    padding:4px 10px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
+    font-weight:700;
+    padding:6px 12px;
     border-radius:6px;
     white-space:nowrap;
     line-height:1.3;
+    text-transform:uppercase;
+    letter-spacing:1px;
   }
 
   .kpi-tag.green{
@@ -264,13 +278,13 @@
     color:#1a1a0a;
     border:none;
     font-weight:700;
-    padding:6px 12px;
+    padding:8px 14px;
     border-radius:4px;
     box-shadow:
       2px 3px 0 rgba(0,0,0,.3),
       inset 0 1px 0 rgba(255,255,255,.3);
     transform:rotate(-1deg);
-    font-size:12px;
+    font-size:15px;
   }
 
   .kpi-tag.blue{
@@ -315,9 +329,11 @@
   .section-heading{
     position:relative;
     z-index:1;
-    font-size:28px;
-    font-weight:800;
-    letter-spacing:.01em;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(30px,5vw,42px);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:-0.5px;
     text-align:center;
   }
 
@@ -414,13 +430,15 @@
 
   /* ── label ── */
   .label{
-    font-size:20px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:22px;
     font-weight:700;
-    letter-spacing:.02em;
+    text-transform:uppercase;
+    letter-spacing:1px;
     line-height:1.3;
     color:rgba(255,255,255,.55);
     transition:color .35s ease, text-shadow .35s ease;
-    max-width:320px;
+    max-width:380px;
   }
 
   .switch-row.active .label{
@@ -430,9 +448,12 @@
 
   /* ── hint ── */
   .hint{
-    font-size:14px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
+    font-weight:700;
     color:rgba(255,255,255,.25);
-    letter-spacing:.03em;
+    letter-spacing:2px;
+    text-transform:uppercase;
     z-index:1;
     text-align:center;
     padding-bottom:24px;
@@ -470,20 +491,23 @@
   }
 
   .solution-label{
-    font-size:11px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
     font-weight:700;
     text-transform:uppercase;
-    letter-spacing:.12em;
+    letter-spacing:3px;
     color:rgba(255,100,0,.6);
     margin-bottom:12px;
   }
 
   .solution-heading{
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:.01em;
-    line-height:1.35;
-    margin-bottom:20px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(24px,4vw,32px);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:-0.5px;
+    line-height:1.2;
+    margin-bottom:24px;
   }
 
   .solution-split{
@@ -519,24 +543,30 @@
   }
 
   .solution-card-title{
-    font-size:14px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:20px;
     font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
     color:rgba(255,255,255,.85);
-    margin-bottom:8px;
+    margin-bottom:10px;
   }
 
   .solution-card-desc{
-    font-size:12px;
+    font-size:16px;
     color:rgba(255,255,255,.4);
-    line-height:1.5;
+    line-height:1.6;
   }
 
   .solution-card-approach{
     display:inline-block;
-    margin-top:10px;
-    font-size:11px;
+    margin-top:12px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
     font-weight:700;
-    padding:4px 10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:6px 12px;
     border-radius:6px;
     line-height:1.3;
   }
@@ -629,9 +659,12 @@
   .metrics-roas-block{
     background:#C5E654;
     color:#1a1a0a;
-    font-size:11px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;
     font-weight:700;
-    padding:6px 12px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:8px 14px;
     border-radius:6px;
     line-height:1.4;
     box-shadow:
@@ -717,7 +750,7 @@
 
 <!-- ═══ 3. MEDIA MARKETING STREAMS ═══ -->
 
-<div class="streams-section" style="margin-top:16px">
+<div class="streams-section" style="margin-top:64px">
   <div class="streams-title">Media Marketing Streams</div>
   <div class="value-blocks">
     <div class="value-block">
@@ -809,7 +842,7 @@
         </div>
         <div class="stream-kpi-column">
           <span class="kpi-tag green">P. ROAS 360</span>
-          <div class="stream-kpi-goal" style="font-size:13px">Goal: $70K → $1M<br>monthly spend</div>
+          <div class="stream-kpi-goal" style="font-size:15px">Goal: $70K → $1M<br>monthly spend</div>
         </div>
       </div>
     </div>
